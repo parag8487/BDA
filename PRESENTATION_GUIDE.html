@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BDA Presentation Guide</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --card: #ffffff; --text: #1d2125; --muted: #5b6470;
+    --border: #e1e3e6; --accent: #2457c5; --accent-soft: #e8eefb;
+    --warn: #9a5b00; --warn-soft: #fff4e0; --code-bg: #f0f1f3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151b; --card: #1a1e26; --text: #e6e8eb; --muted: #9aa3ae;
+      --border: #2c323d; --accent: #7aa2ff; --accent-soft: #1f2a44;
+      --warn: #f0b45a; --warn-soft: #33270f; --code-bg: #0f1217;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  .layout { display: flex; max-width: 1200px; margin: 0 auto; }
+  nav.toc {
+    position: sticky; top: 0; align-self: flex-start; height: 100vh; overflow-y: auto;
+    width: 250px; flex-shrink: 0; padding: 32px 16px; border-right: 1px solid var(--border);
+    font-size: 14px;
+  }
+  nav.toc b { display: block; margin-bottom: 8px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+  nav.toc a { display: block; padding: 5px 8px; border-radius: 6px; color: var(--text); text-decoration: none; }
+  nav.toc a:hover { background: var(--accent-soft); color: var(--accent); }
+  main { flex: 1; min-width: 0; padding: 32px 40px 80px; }
+  header h1 { font-size: 30px; line-height: 1.25; margin: 0 0 8px; }
+  header p { color: var(--muted); margin: 2px 0; }
+  section {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px 28px; margin-top: 24px; scroll-margin-top: 16px;
+  }
+  h2 { font-size: 22px; margin: 0 0 14px; }
+  h3 { font-size: 17px; margin: 22px 0 8px; color: var(--accent); }
+  h4 { font-size: 15px; margin: 18px 0 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 8px 0; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { background: var(--accent-soft); font-weight: 600; }
+  .table-wrap { overflow-x: auto; }
+  code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; font-family: Consolas, "Cascadia Mono", monospace; font-size: .9em; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; overflow-x: auto; font-size: 13.5px; line-height: 1.45; }
+  pre code { background: none; padding: 0; }
+  .say {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-style: italic;
+  }
+  .warn { border: 1px solid var(--warn); background: var(--warn-soft); }
+  .warn h2 { color: var(--warn); }
+  details { border-bottom: 1px solid var(--border); padding: 8px 0; }
+  details summary { cursor: pointer; font-weight: 600; }
+  details p, details ol, details ul { margin: 6px 0 4px; color: var(--text); }
+  .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+  .fact { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .fact span { display: block; color: var(--muted); font-size: 12.5px; }
+  .fact strong { font-size: 15px; }
+  ol li, ul li { margin: 3px 0; }
+  @media (max-width: 860px) {
+    nav.toc { display: none; }
+    main { padding: 20px 16px 60px; }
+    section { padding: 18px 16px; }
+  }
+  @media print {
+    nav.toc { display: none; }
+    section { break-inside: avoid-page; }
+    details { display: block; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+  <b>Contents</b>
+  <a href="#start">1. How to start</a>
+  <a href="#summary">2. One-paragraph summary</a>
+  <a href="#questions">3. The 3 business questions</a>
+  <a href="#tech">4. Technologies &amp; why</a>
+  <a href="#arch">5. Architecture</a>
+  <a href="#demo">6. Demo script</a>
+  <a href="#honest">7. ⚠️ Be honest</a>
+  <a href="#viva">8. Viva Q&amp;A</a>
+  <a href="#facts">9. Cheat-sheet</a>
+  <a href="#fixes">10. Fixes made</a>
+</nav>
+
+<main>
+<header>
+  <h1>BDA Mini Project: Presentation &amp; Viva Guide</h1>
+  <p><strong>Project title:</strong> E-Commerce Customer Behavior: Batch &amp; Real-Time Analytics</p>
+  <p><strong>App name on screen:</strong> BehaviorStream &nbsp;·&nbsp; <strong>Subject:</strong> Big Data Analytics (BDA), Semester 7</p>
+</header>
+
+<section id="start">
+  <h2>1. How to start the project (do this before class)</h2>
+  <ol>
+    <li>Open the folder <code>Downloads\Mini Project Sem 7\BDA</code>.</li>
+    <li>Double-click <strong><code>START-PROJECT.bat</code></strong>. A black window opens. <strong>Don't close it</strong> while presenting.</li>
+    <li>The browser opens <strong>http://localhost:3000</strong> (if not, type it in yourself).</li>
+    <li>To stop: close the black window (or press <code>Ctrl + C</code> in it).</li>
+  </ol>
+  <p>Needs <strong>Node.js</strong> installed (it already is on this laptop). No internet is needed except for the fonts.</p>
+  <p><strong>Before going to class:</strong> start it once at home to make sure it opens. Keep the browser zoom at 100%.</p>
+</section>
+
+<section id="summary">
+  <h2>2. The project in one paragraph (memorise this)</h2>
+  <div class="say">"Our project analyses e-commerce customer behaviour using a <strong>dual pipeline</strong>: a <strong>batch pipeline</strong> and a <strong>real-time streaming pipeline</strong>. In the batch pipeline, the customer dataset (380 customers) is stored in <strong>Hadoop HDFS</strong> and processed with <strong>Apache Spark (PySpark)</strong> to segment customers, find customers at risk of churn, and train a <strong>Logistic Regression</strong> model that predicts customer satisfaction. In the streaming pipeline, live purchase events are sent through <strong>Apache Kafka</strong> and processed by <strong>Spark Structured Streaming</strong> to detect anomalies like unusually large purchases or very low ratings in real time. Results are stored in <strong>PostgreSQL</strong> and shown on an interactive web dashboard built in <strong>React</strong>."</div>
+</section>
+
+<section id="questions">
+  <h2>3. The three business questions (the heart of the project)</h2>
+  <div class="table-wrap"><table>
+    <tr><th>#</th><th>Question</th><th>How we answer it</th><th>Answer</th></tr>
+    <tr><td>Q1</td><td>Can we <strong>segment customers</strong> by demographics (age, gender, city) and behaviour (spend, items, membership)?</td><td>Spark <code>groupBy</code> aggregations + rule-based grouping into 5 segments</td><td>Yes. 5 segments: High-Value VIPs, Steady Core Shoppers, Frequent Bargain Hunters, Churn Candidates, Standard Casuals</td></tr>
+    <tr><td>Q2</td><td>Which customers are <strong>at risk of churning</strong> (not buying again)?</td><td>Rule: <strong>inactive &gt; 45 days</strong> AND satisfaction is Neutral/Unsatisfied → risk score 0–100</td><td>Yes. Risk quadrant + prioritised churn list with retention actions</td></tr>
+    <tr><td>Q3</td><td>Can we <strong>predict satisfaction level</strong> (Satisfied / Neutral / Unsatisfied)?</td><td>PySpark MLlib <strong>Multinomial Logistic Regression</strong>, 80/20 train/test split</td><td>Yes. Reported 87.4% accuracy, F1 = 0.866</td></tr>
+  </table></div>
+</section>
+
+<section id="tech">
+  <h2>4. Technologies used and WHY</h2>
+  <div class="table-wrap"><table>
+    <tr><th>Tool</th><th>What it does in this project</th><th>One-line reason</th></tr>
+    <tr><td><strong>Hadoop HDFS</strong></td><td>Stores the dataset CSV in a distributed file system</td><td>Big data needs storage spread over many machines, with replication for fault tolerance</td></tr>
+    <tr><td><strong>YARN</strong></td><td>Allocates CPU/memory to Spark jobs on the cluster</td><td>Hadoop's resource manager / job scheduler</td></tr>
+    <tr><td><strong>Apache Spark (PySpark)</strong></td><td>Batch processing: cleaning, group-by, churn rules</td><td>In-memory processing, ~10–100x faster than MapReduce</td></tr>
+    <tr><td><strong>Spark MLlib</strong></td><td>Logistic Regression model for satisfaction prediction</td><td>Machine learning that runs distributed on the same cluster</td></tr>
+    <tr><td><strong>Apache Kafka</strong></td><td>Receives live purchase events (topic <code>ecommerce.transactions.v1</code>, 3 partitions)</td><td>High-throughput, fault-tolerant message queue for streaming</td></tr>
+    <tr><td><strong>Zookeeper</strong></td><td>Coordinates the Kafka broker</td><td>Kafka (this version) needs it for metadata/leader election</td></tr>
+    <tr><td><strong>Spark Structured Streaming</strong></td><td>Reads from Kafka, detects anomalies, 30-sec sliding windows</td><td>Same Spark API for batch and streaming</td></tr>
+    <tr><td><strong>PostgreSQL</strong></td><td>Stores the final processed results (summary tables, anomalies)</td><td>Easy SQL access for dashboards/reports</td></tr>
+    <tr><td><strong>Docker / docker-compose</strong></td><td>Runs all of the above as containers with one command</td><td>Easy, repeatable cluster setup</td></tr>
+    <tr><td><strong>React + TypeScript + Vite + Tailwind</strong></td><td>The web dashboard you show</td><td>Interactive visualisation</td></tr>
+  </table></div>
+</section>
+
+<section id="arch">
+  <h2>5. Architecture (draw this on the board if asked)</h2>
+<pre><code>                 BATCH PIPELINE
+ CSV dataset ──► HDFS ──► Spark (Analysis.py) ──► PostgreSQL ──┐
+                     └──► Spark MLlib (predict.py) ─► model     │
+                                                               ├──► React Dashboard
+                 STREAMING PIPELINE                             │
+ KafkaProducer.py ──► Kafka topic ──► Spark Streaming ──► PostgreSQL / HDFS (Parquet)
+                     (3 partitions)   (anomaly + windows)</code></pre>
+  <p>This is called a <strong>Lambda Architecture</strong>: a batch layer (accurate, slow, full history) + a speed layer (fast, real-time) + a serving layer (PostgreSQL + dashboard).</p>
+</section>
+
+<section id="demo">
+  <h2>6. Demo script: what to click and what to say (≈ 8–10 min)</h2>
+  <p><strong>Open:</strong> http://localhost:3000. You start on <strong>Analysis Reports</strong>.</p>
+
+  <h3>Step 1: Analysis Reports → Q1 tab (Segmentation)</h3>
+  <ul>
+    <li>Point to the top: <em>"380 customers processed, average spend $1,867, 120 churn candidates."</em></li>
+    <li>Scroll to the <strong>5 segment cards</strong>: <em>"Spark grouped customers into 5 behaviour segments. For example High-Value VIPs spend about $5,463 on average, while Standard Casuals spend about $896."</em></li>
+    <li><strong>Geographic Spending</strong>: <em>"Average spend per city."</em></li>
+    <li><strong>Membership Tier</strong>: <em>"Gold members spend about 5.2x more than Bronze members."</em></li>
+    <li><strong>Interactive Data Slice</strong>: change the <strong>City</strong> dropdown → <em>"We can filter the data live."</em></li>
+  </ul>
+
+  <h3>Step 2: Q2 tab (Churn Risk)</h3>
+  <ul>
+    <li><em>"We define churn risk using two features: Days Since Last Purchase and Satisfaction Level."</em></li>
+    <li>Show the <strong>4 quadrants</strong>: <em>"Customers inactive more than 45 days and unsatisfied are critical at-risk."</em></li>
+    <li>Click <strong>Broad (30) / Balanced (60) / Severe Only (85)</strong> → <em>"The threshold controls how many customers get flagged and how much revenue is at risk."</em></li>
+    <li>In the churn queue click <strong>Send Winback</strong> on one customer → <em>"The business can act directly on these customers."</em></li>
+  </ul>
+
+  <h3>Step 3: Q3 tab (Prediction)</h3>
+  <ul>
+    <li><em>"We trained a multinomial Logistic Regression model in Spark MLlib with an 80/20 train-test split."</em></li>
+    <li>Use the <strong>What-If Playground</strong>: start with Gold, rating 4.4 → <strong>Satisfied</strong>. Then click <strong>Bronze</strong>, drag <strong>Average Rating</strong> down to ~1.5 and <strong>Days Since Last Purchase</strong> up to ~100 → prediction changes to <strong>Unsatisfied</strong>.</li>
+    <li><em>"The strongest positive factor is Average Rating (+1.25), and inactivity days has a negative weight (−0.058)."</em></li>
+    <li>Point at <strong>Accuracy 87.42%, F1 0.866</strong>, the confusion matrix, and the coefficients.</li>
+  </ul>
+
+  <h3>Step 4: Batch Pipeline (PySpark) tab</h3>
+  <ul>
+    <li>Click the blue <strong>Submit spark-submit Job</strong> button → logs show 4 stages. Explain each: (1) read CSV from HDFS, (2) groupBy city &amp; membership, (3) churn rules, (4) write to PostgreSQL.</li>
+    <li>Switch to <strong>predict.py</strong> and submit → model training logs.</li>
+    <li>Show the <strong>HDFS dataset browser</strong>, click <strong>+ Ingest New Record</strong> → <strong>Write to HDFS</strong> → <em>"record count goes from 380 to 381."</em></li>
+  </ul>
+
+  <h3>Step 5: Real-Time Stream (Kafka) tab</h3>
+  <ul>
+    <li><em>"This is the streaming side. Each row is a purchase event arriving from Kafka."</em></li>
+    <li>Point at <strong>events/sec</strong>, <strong>Sliding 30s revenue</strong>, and the <strong>partition</strong> column (P-0, P-1, P-2).</li>
+    <li>Click <strong>3.5x Burst</strong> → events speed up.</li>
+    <li>Click <strong>Inject Outlier / Anomaly</strong> → a red row appears and the <strong>Spark Anomaly Engine</strong> panel flags it. <em>"Rules: amount &gt; $1,500 or rating ≤ 1.5."</em></li>
+    <li>Click <strong>Pause Kafka Producer</strong> to stop.</li>
+  </ul>
+
+  <h3>Step 6: PostgreSQL Console tab</h3>
+  <ul>
+    <li>Click each preset query button (Q1, Q2, Q3, Real-Time Anomaly Sink) → results table.</li>
+    <li><em>"After Spark processes the data, the results are stored in PostgreSQL so they can be queried with SQL."</em></li>
+    <li><strong>Export CSV</strong> downloads the result.</li>
+  </ul>
+
+  <h3>Step 7: Cluster Architecture tab</h3>
+  <ul>
+    <li>Show the <strong>4-stage topology</strong> (Ingestion → Compute → Persistence → Insights).</li>
+    <li>Show the <strong>6 commands</strong> to run the real cluster with Docker.</li>
+    <li>Click through the code tabs: <strong>docker-compose.yml, Analysis.py, predict.py, KafkaProducer.py, SparkStreamingConsumer.py</strong>. <em>"These are the actual PySpark and Kafka scripts for the cluster."</em></li>
+  </ul>
+
+  <h4>Closing line</h4>
+  <div class="say">"So our system combines batch analytics for deep insights and streaming analytics for instant alerts, which helps an e-commerce company retain customers and detect unusual activity."</div>
+</section>
+
+<section id="honest" class="warn">
+  <h2>7. ⚠️ Be honest about this: it's the most likely tricky question</h2>
+  <p>The <strong>web dashboard runs entirely in the browser</strong>. It <strong>simulates</strong> the Hadoop/Spark/Kafka pipeline: the 380 customer records are generated by code, the streaming events are randomly generated every second, the spark-submit logs are scripted, and the SQL console recognises the preset queries (it is not a real PostgreSQL connection). The <strong>real cluster code</strong> (docker-compose + 4 Python scripts) is included in the Cluster Architecture tab, but it is <strong>not running</strong> on this laptop.</p>
+  <p>If the teacher asks <em>"Is Hadoop actually running?"</em>, say:</p>
+  <div class="say">"The dashboard is the presentation/visualisation layer and simulates the pipeline so it can be demonstrated on a laptop without a cluster. The real implementation (docker-compose for Hadoop, Spark, Kafka and PostgreSQL, plus the PySpark and Kafka scripts) is shown in the Cluster Architecture tab and can be run with <code>docker-compose up -d</code>. Running the full cluster needs about 8–16 GB RAM, so for the demo we used the simulated dashboard."</div>
+  <p>Don't claim it is connected live to Hadoop. Teachers usually respect an honest answer and penalise a bluff.</p>
+</section>
+
+<section id="viva">
+  <h2>8. Likely viva questions &amp; answers</h2>
+  <p style="color:var(--muted)">Click a question to see the answer. Try answering it yourself first.</p>
+
+  <h3>Big Data basics</h3>
+  <details><summary>What is Big Data? What are the 5 V's?</summary>
+    <p>Data too large/fast/varied for traditional systems. <strong>Volume</strong> (size), <strong>Velocity</strong> (speed of arrival), <strong>Variety</strong> (types: structured, semi-, unstructured), <strong>Veracity</strong> (accuracy/quality), <strong>Value</strong> (useful insight).<br><em>In our project:</em> Velocity = Kafka streaming, Volume = HDFS storage, Value = churn &amp; satisfaction insights.</p></details>
+  <details><summary>Batch vs. stream processing?</summary>
+    <p>Batch = process a large stored dataset at once (e.g. daily report): high latency, complete view. Stream = process each event as it arrives: low latency (milliseconds/seconds). We use both.</p></details>
+  <details><summary>What is Lambda Architecture?</summary>
+    <p>Batch layer + speed (streaming) layer + serving layer. Our project follows it.</p></details>
+
+  <h3>Hadoop</h3>
+  <details><summary>What is HDFS?</summary>
+    <p>Hadoop Distributed File System. Splits files into <strong>blocks (128 MB default)</strong> and stores them across DataNodes with <strong>replication (default 3; we use 1 since it's a single-node demo)</strong>.</p></details>
+  <details><summary>NameNode vs DataNode?</summary>
+    <p>NameNode = master, stores metadata (which block is where). DataNode = worker, stores the actual blocks.</p></details>
+  <details><summary>What is YARN?</summary>
+    <p>Yet Another Resource Negotiator: Hadoop's resource manager. ResourceManager (master) + NodeManager (per node).</p></details>
+  <details><summary>Command to upload a file to HDFS?</summary>
+    <p><code>hdfs dfs -put localfile /hdfs/path</code></p></details>
+  <details><summary>Web UI ports?</summary>
+    <p>NameNode UI 9870, YARN 8088, Spark Master 8080.</p></details>
+
+  <h3>Spark</h3>
+  <details><summary>Why Spark instead of MapReduce?</summary>
+    <p>Spark processes data <strong>in memory</strong>; MapReduce writes to disk between every step. Spark also has SQL, MLlib and Streaming in one engine.</p></details>
+  <details><summary>What is an RDD / DataFrame?</summary>
+    <p>RDD = Resilient Distributed Dataset, Spark's basic immutable distributed collection. DataFrame = RDD with named columns (like a table). We use DataFrames.</p></details>
+  <details><summary>Transformation vs Action?</summary>
+    <p>Transformations (<code>filter</code>, <code>groupBy</code>, <code>withColumn</code>) are <strong>lazy</strong>: nothing runs. Actions (<code>count</code>, <code>show</code>, <code>write</code>) trigger execution.</p></details>
+  <details><summary>What is lazy evaluation?</summary>
+    <p>Spark builds a plan (DAG) and only executes when an action is called, which lets it optimise.</p></details>
+  <details><summary>What is the DAG?</summary>
+    <p>Directed Acyclic Graph of stages that Spark builds for a job.</p></details>
+  <details><summary>Driver vs Executor?</summary>
+    <p>The driver runs your main program and plans the job; executors run the tasks on worker nodes.</p></details>
+  <details><summary>What does <code>spark-submit</code> do?</summary>
+    <p>Submits a PySpark script to the cluster (<code>--master yarn</code>).</p></details>
+
+  <h3>Spark MLlib / Machine Learning (Q3)</h3>
+  <details><summary>Why Logistic Regression?</summary>
+    <p>Simple, fast, interpretable (we can see each feature's weight), and works for classification. We used the <strong>multinomial</strong> version because there are 3 classes.</p></details>
+  <details><summary>What is the sigmoid / softmax?</summary>
+    <p>Sigmoid maps any number to 0–1 (a probability). Softmax is the multi-class version.</p></details>
+  <details><summary>Steps in your ML pipeline?</summary>
+    <ol>
+      <li><strong>StringIndexer</strong>: converts text categories (Gender, City, Membership, label) to numbers</li>
+      <li><strong>OneHotEncoder</strong>: turns category indexes into 0/1 vectors</li>
+      <li><strong>VectorAssembler</strong>: combines all features into one vector</li>
+      <li><strong>StandardScaler</strong>: scales features so none dominates</li>
+      <li><strong>LogisticRegression</strong> (maxIter=100, regParam=0.01, elasticNet=0.2)</li>
+    </ol></details>
+  <details><summary>Features used?</summary>
+    <p>Age, Total Spend, Items Purchased, Average Rating, Days Since Last Purchase, Gender, City, Membership Type. Target: Satisfaction Level.</p></details>
+  <details><summary>Train/test split?</summary>
+    <p>80% train / 20% test, <code>seed=42</code> so it's reproducible.</p></details>
+  <details><summary>Accuracy vs F1-score?</summary>
+    <p>Accuracy = correct predictions / total. F1 = harmonic mean of precision and recall, which is better when classes are unbalanced.</p></details>
+  <details><summary>Precision vs Recall?</summary>
+    <p>Precision = of the ones predicted positive, how many were right. Recall = of the actual positives, how many we found.</p></details>
+  <details><summary>Confusion matrix?</summary>
+    <p>A table of actual vs predicted classes. The diagonal is the correct predictions.</p></details>
+  <details><summary>What is regularisation?</summary>
+    <p>A penalty on large weights to avoid <strong>overfitting</strong>. ElasticNet mixes L1 (Lasso) and L2 (Ridge).</p></details>
+  <details><summary>Most important feature?</summary>
+    <p>Average Rating (+1.25), then Gold membership (+0.85). Days since last purchase is negative (−0.058).</p></details>
+
+  <h3>Segmentation &amp; Churn (Q1, Q2)</h3>
+  <details><summary>What is churn?</summary>
+    <p>When a customer stops buying from the company.</p></details>
+  <details><summary>How do you calculate churn risk?</summary>
+    <p>Based on days since last purchase (more days → more risk) and satisfaction (unsatisfied → +35, neutral → +15, satisfied → −10), Gold members −10, low rating +15. Capped at 5–99.</p></details>
+  <details><summary>Why 45 days?</summary>
+    <p>A business threshold for "inactive". It can be tuned (the threshold buttons show that).</p></details>
+  <details><summary>How did you segment customers?</summary>
+    <p>The dashboard labels 5 segments using business rules on spend, membership, items, discount use and churn score (e.g. spend &gt; $2,500 and Gold → VIP). <em>If asked about K-Means:</em> the screen title says K-Means; be honest that the dashboard segments are rule-based, and K-Means (unsupervised clustering into k groups by distance to centroids) is the algorithm that would be used on the real cluster.</p></details>
+
+  <h3>Kafka &amp; Streaming</h3>
+  <details><summary>What is Kafka?</summary>
+    <p>A distributed publish–subscribe messaging system. <strong>Producers</strong> write messages to <strong>topics</strong>, <strong>consumers</strong> read them.</p></details>
+  <details><summary>Topic, partition, offset?</summary>
+    <p>Topic = named stream (<code>ecommerce.transactions.v1</code>). Partition = a topic is split into parts for parallelism (we have 3). Offset = position number of a message in a partition (shown as <code>p1:10419</code>).</p></details>
+  <details><summary>Consumer group?</summary>
+    <p>A set of consumers that share partitions so each message is processed once by the group.</p></details>
+  <details><summary>Why Zookeeper?</summary>
+    <p>Manages Kafka broker metadata and leader election (newer Kafka can use KRaft instead).</p></details>
+  <details><summary>What is a sliding window?</summary>
+    <p>Aggregation over the last 30 seconds, recalculated every 10 seconds.</p></details>
+  <details><summary>What is a watermark?</summary>
+    <p>How long Spark waits for late-arriving data (1 minute here) before finalising a window.</p></details>
+  <details><summary>How are anomalies detected?</summary>
+    <p>Rules: amount &gt; $1,500 <strong>or</strong> rating ≤ 1.5.</p></details>
+  <details><summary>What is a micro-batch?</summary>
+    <p>Spark Structured Streaming processes the stream in tiny batches every few milliseconds/seconds.</p></details>
+
+  <h3>PostgreSQL</h3>
+  <details><summary>Why PostgreSQL if you already have HDFS?</summary>
+    <p>HDFS is for large raw data; PostgreSQL stores the small final results that dashboards query quickly with SQL.</p></details>
+  <details><summary>How does Spark write to PostgreSQL?</summary>
+    <p>Through <strong>JDBC</strong>: <code>.write.format("jdbc").option("url", "jdbc:postgresql://postgres:5432/ecommerce_analytics")</code>.</p></details>
+
+  <h3>Docker</h3>
+  <details><summary>What is Docker?</summary>
+    <p>It packages software into containers that run the same everywhere. <strong>docker-compose</strong> starts many containers (Hadoop, Spark, Kafka, Postgres) from one YAML file.</p></details>
+
+  <h3>Project-level</h3>
+  <details><summary>Dataset?</summary>
+    <p>E-commerce Customer Behavior dataset, 380 customers. Columns: Customer ID, Gender, Age, City, Membership Type, Total Spend, Items Purchased, Average Rating, Discount Applied, Days Since Last Purchase, Satisfaction Level. (In the dashboard the 380 records are generated by code that mimics this dataset.)</p></details>
+  <details><summary>Limitations?</summary>
+    <p>Small dataset (380 rows, not truly "big"); the dashboard is a simulation; churn rules are hand-made thresholds; single-node cluster (replication = 1).</p></details>
+  <details><summary>Future scope?</summary>
+    <p>Run on a real multi-node cluster or the cloud (AWS EMR / Databricks); use larger real datasets; try Random Forest / XGBoost; real-time dashboards with Grafana; a recommendation system; automatic win-back emails.</p></details>
+  <details><summary>Real-world applications?</summary>
+    <p>Amazon/Flipkart customer retention, fraud detection in payments, personalised offers, inventory planning.</p></details>
+</section>
+
+<section id="facts">
+  <h2>9. Quick facts cheat-sheet</h2>
+  <div class="facts">
+    <div class="fact"><span>Customers</span><strong>380</strong></div>
+    <div class="fact"><span>Cities (6)</span><strong>New York, LA, Chicago, San Francisco, Houston, Miami</strong></div>
+    <div class="fact"><span>Membership tiers</span><strong>Bronze / Silver / Gold</strong></div>
+    <div class="fact"><span>Segments</span><strong>5</strong></div>
+    <div class="fact"><span>Churn rule</span><strong>&gt; 45 days + not satisfied</strong></div>
+    <div class="fact"><span>Model</span><strong>Multinomial Logistic Regression</strong></div>
+    <div class="fact"><span>Split / test set</span><strong>80/20 · N = 76</strong></div>
+    <div class="fact"><span>Accuracy / F1</span><strong>87.42% · 0.866</strong></div>
+    <div class="fact"><span>Kafka topic</span><strong>ecommerce.transactions.v1 (3 partitions)</strong></div>
+    <div class="fact"><span>Anomaly rule</span><strong>amount &gt; $1,500 or rating ≤ 1.5</strong></div>
+    <div class="fact"><span>Streaming window</span><strong>30 s window, 10 s slide, 1 min watermark</strong></div>
+    <div class="fact"><span>Versions</span><strong>Hadoop 3.2.1 · Spark 3.1.1 · Kafka (Confluent 7.3.0) · PostgreSQL 15</strong></div>
+    <div class="fact"><span>Ports</span><strong>HDFS 9000 / UI 9870 · YARN 8088 · Spark 7077 / UI 8080 · Kafka 9092 · Postgres 5432 · Dashboard 3000</strong></div>
+  </div>
+</section>
+
+<section id="fixes">
+  <h2>10. Fixes made so it works correctly</h2>
+  <ol>
+    <li><strong>Install failed</strong> (<code>npm install</code> error): the <code>esbuild</code> version clashed with Vite 8. Updated <code>esbuild</code> to <code>^0.28.0</code> in <code>package.json</code>.</li>
+    <li><strong>Wrong numbers in text</strong>: the Q1 "Key Finding" said $2,840 vs $420 and "3.4x" while the cards showed $5,463 vs $896 and 5.2x. The text now uses the real calculated numbers.</li>
+    <li><strong>SQL Console Q3 preset showed the wrong table</strong> (just the first 10 customers). It now shows satisfaction counts for Gold members.</li>
+    <li><strong>SQL Console Q1</strong> now actually sorts by average spend and limits to 10 rows, as the query says.</li>
+    <li><strong>Ctrl + Enter</strong> in the SQL box now runs the query (the button said it did, but it didn't).</li>
+    <li><strong>The top bar overflowed sideways</strong> on smaller screens/projectors. It now fits.</li>
+  </ol>
+</section>
+</main>
+</div>
+</body>
+</html>

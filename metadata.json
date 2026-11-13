@@ -1,0 +1,6 @@
+{
+  "name": "E-Commerce Customer Behavior: Batch & Real-Time Analytics",
+  "description": "Dual-workflow big data analytics platform for e-commerce customer behavior analysis using Hadoop, Apache Spark, Kafka, and PostgreSQL with predictive modeling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
